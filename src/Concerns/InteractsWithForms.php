@@ -49,4 +49,22 @@ trait InteractsWithForms
 
         return $this;
     }
+ /**
+     * Prepare backend translated model form data
+     *
+     * @param $common
+     * @param $translated
+     * @return array
+     */
+    public function translatedFormData($common, $translated)
+    {
+        $formatted = [];
+        foreach (p_supported_locales() as $locale) {
+            foreach ($translated as $key => $value) {
+                $formatted[$locale . '[' . $key . ']'] = "[$locale] $value";
+            }
+        }
+
+        return array_merge($common, $formatted);
+    }
 }
