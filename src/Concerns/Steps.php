@@ -19,6 +19,21 @@ trait Steps
         return $this;
     }
 
+    /**
+     * Can be used to wrap arrangement in then() block.
+     *
+     * @param $callable
+     * @return $this
+     */
+    public function having($callable)
+    {
+        if (is_callable($callable)) {
+            call_user_func($callable);
+        }
+
+        return $this;
+    }
+
     public function toBeImplemented($message = 'To be implemented.')
     {
         $this->markTestIncomplete($message);
@@ -36,6 +51,12 @@ trait Steps
     }
 
     public function wantTo($message)
+    {
+        // nothing , just for test readability
+        return $this;
+    }
+
+    public function userWantTo($message)
     {
         // nothing , just for test readability
         return $this;

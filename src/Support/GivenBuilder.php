@@ -66,6 +66,16 @@ class GivenBuilder
             return $this;
         }
 
+        // Having($closure) : just to prepare / arrange some data
+        if ('having' === $name) {
+            $this->lastResultStep = null;
+            if (is_callable($arguments[0])) {
+                call_user_func($arguments[0]);
+            }
+
+            return $this;
+        }
+
         $method = $this->extractMethod($name);
 
         // Try to delegate to the provider, and store the result as the last step result

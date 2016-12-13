@@ -36,11 +36,14 @@ trait InteractsWithMailCatcher
      *
      * @param int $expectedCount
      * @param string $message
+     * @return $this
      */
     public function assertMailsCount($expectedCount, $message = '')
     {
         $mails = $this->getMails();
         $this->assertEquals($expectedCount, count($mails), $message);
+
+        return $this;
     }
 
     /**
@@ -48,10 +51,13 @@ trait InteractsWithMailCatcher
      *
      * @param string $expected
      * @param string $message
+     * @return $this
      */
     public function assertMailSubject($expected, $message = '')
     {
         $this->assertSame($expected, $this->getLastMail()->subject, $message);
+
+        return $this;
     }
 
     /**
@@ -60,10 +66,14 @@ trait InteractsWithMailCatcher
      * @param string $needle
      * @param string $message
      * @param bool $ignoreCase
+     *
+     * @return $this
      */
     public function assertMailPlainBodyContains($needle, $message = '', $ignoreCase = false)
     {
         $this->assertContains($needle, $this->getLatestMailPlainBody(), $message, $ignoreCase);
+
+        return $this;
     }
 
     /**
@@ -72,16 +82,20 @@ trait InteractsWithMailCatcher
      * @param string $needle
      * @param string $message
      * @param bool $ignoreCase
+     * @return $this
      */
     public function assertMailHtmlBodyContains($needle, $message = '', $ignoreCase = false)
     {
         $this->assertContains($needle, $this->getLatestMailHtmlBody(), $message, $ignoreCase);
+
+        return $this;
     }
 
     /**
      * Asserts that last message plain body is empty.
      *
      * @param string $message
+     * @return $this
      */
     public function assertMailPlainBodyEmpty($message = '')
     {
@@ -96,12 +110,15 @@ trait InteractsWithMailCatcher
         }
 
         static::assertEmpty($actual, $message);
+
+        return $this;
     }
 
     /**
      * Assert that last html body is empty.
      *
      * @param string $message
+     * @return $this
      */
     public function assertMailHtmlBodyEmpty($message = '')
     {
@@ -116,6 +133,8 @@ trait InteractsWithMailCatcher
         }
 
         static::assertEmpty($actual, $message);
+
+        return $this;
     }
 
     /**
