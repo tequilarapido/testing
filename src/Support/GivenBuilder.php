@@ -2,6 +2,8 @@
 
 namespace Tequilarapido\Testing\Support;
 
+use App\Tests\Support\Providers\GivenProvider;
+
 class GivenBuilder
 {
     /** @var GivenProviderInterface */
@@ -13,9 +15,22 @@ class GivenBuilder
     /** @var mixed */
     private $lastResultStep = null;
 
+    /**
+     * GivenBuilder constructor.
+     *
+     * @param GivenProviderInterface $provider
+     */
     public function __construct(GivenProviderInterface $provider)
     {
         $this->provider = $provider;
+    }
+
+    /**
+     * @return GivenProviderInterface | GivenProvider
+     */
+    public function provider()
+    {
+        return $this->provider;
     }
 
     public function dump()

@@ -39,7 +39,7 @@ trait InteractsWithForms
     }
 
     /**
-     * Disable honeytime
+     * Disable honeytime.
      *
      * @return $this
      */
@@ -49,7 +49,8 @@ trait InteractsWithForms
 
         return $this;
     }
- /**
+
+    /**
      * Prepare backend translated model form data
      *
      * @param $common
