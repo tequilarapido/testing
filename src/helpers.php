@@ -6,6 +6,10 @@ use Tequilarapido\Testing\Support\GivenBuilder;
 use Tequilarapido\Testing\Support\Tester;
 
 if (!function_exists('given')) {
+    /**
+     * @return GivenBuilder
+     * @throws Exception
+     */
     function given()
     {
         if (!class_exists(GivenProvider::class)) {

@@ -32,4 +32,28 @@ trait CommonAsserts
 
         return $this;
     }
+
+    /**
+     * Asserts that a backend form validation has failed.
+     *
+     * @return $this
+     */
+    public function seeBackendValidationHasFailed()
+    {
+        $this->see(trans('presto::backend.common.validation_failed'));
+        
+        return $this;
+    }
+
+    /**
+     * Asserts that a backend form validation has failed.
+     *
+     * @return $this
+     */
+    public function dontSeeBackendValidationHasFailed()
+    {
+        $this->dontSee(trans('presto::backend.common.validation_failed'));
+
+        return $this;
+    }
 }
