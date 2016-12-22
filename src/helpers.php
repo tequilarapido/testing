@@ -1,6 +1,6 @@
 <?php
 
-use Tests\Support\Providers\GivenProvider;
+use Tests\Support\Given\Given;
 use Tequilarapido\Testing\Support\GivenBuilder;
 use Tequilarapido\Testing\Support\Tester;
 
@@ -14,11 +14,11 @@ if (!function_exists('given')) {
         static $given;
 
         if (!$given) {
-            if (!class_exists(GivenProvider::class)) {
-                throw new Exception('You need to define a GivenProvider class.');
+            if (!class_exists(Given::class)) {
+                throw new Exception('You need to define a Given class in yout tests suite.');
             }
 
-            $given = new GivenBuilder(new GivenProvider);
+            $given = new GivenBuilder(new Given);
         }
 
         return $given;
