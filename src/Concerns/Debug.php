@@ -61,4 +61,23 @@ trait Debug
     {
         die('Test stopped.');
     }
+    
+    /**
+     * Disable laravel exception handling to get the real thrown exception.
+     */ 
+    public function disableExceptionHandling()
+    {
+        $this->app->instance(ExceptionHandler::class, new class extends Handler {
+            public function __construct() {}
+            
+            public function report(Exception $e)
+            {
+                // no-op
+            }
+            
+            public function render($request, Exception $e) {
+                throw $e;
+            }
+        });
+    }
 }
