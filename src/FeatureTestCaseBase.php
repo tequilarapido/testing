@@ -4,13 +4,14 @@ namespace Tequilarapido\Testing;
 
 use Illuminate\Foundation\Testing\Concerns\InteractsWithSession;
 use Illuminate\Foundation\Testing\Concerns\MakesHttpRequests;
+use Illuminate\Foundation\Testing\TestCase;
 use Tequilarapido\Testing\Concerns\CommonAsserts;
 use Tequilarapido\Testing\Concerns\DatabaseCustomSetup;
 use Tequilarapido\Testing\Concerns\Debug;
 use Tequilarapido\Testing\Concerns\Steps;
 use Tequilarapido\Testing\Support\Tester;
 
-abstract class TestCase extends \Illuminate\Foundation\Testing\TestCase
+abstract class FeatureTestCaseBase extends TestCase
 {
     use MakesHttpRequests,
         InteractsWithSession,

@@ -52,6 +52,7 @@ trait DatabaseCustomSetup
             $database->connection($name)->beginTransaction();
         }
 
+        /** @noinspection  */
         $this->beforeApplicationDestroyed(function () use ($database) {
             foreach ($this->connectionsToTransact() as $name) {
                 $database->connection($name)->rollBack();
@@ -62,6 +63,7 @@ trait DatabaseCustomSetup
 
     protected function connectionsToTransact()
     {
+        /** @noinspection PhpUndefinedFieldInspection */
         return property_exists($this, 'connectionsToTransact')
             ? $this->connectionsToTransact : [null];
     }

@@ -2,14 +2,12 @@
 
 namespace Tequilarapido\Testing\Support;
 
-use Tequilarapido\Testing\TestCase;
-
 class Tester
 {
     /** @var Tester  singleton instance. */
     protected static $instance;
 
-    /** @var  TestCase Current test case */
+    /** @var   \Tests\Feature\FeatureTestCase */
     public $testCase;
 
     /**
@@ -36,9 +34,9 @@ class Tester
     }
 
     /**
-     * Sets current test case
+     * Sets current test case.
      *
-     * @param TestCase $testCase
+     * @param \Tests\Feature\FeatureTestCase $testCase
      *
      * @return Tester
      */
@@ -48,6 +46,4 @@ class Tester
 
         return $this;
     }
-
-
 }
