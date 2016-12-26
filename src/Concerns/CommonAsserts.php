@@ -33,4 +33,59 @@ trait CommonAsserts
         return $this;
     }
 
+    /**
+     * Assert false wrapper.
+     *
+     * @param $actual
+     * @param string $message
+     * @return $this
+     */
+    public function assertIsFalse($actual, $message = '')
+    {
+        $this->assertFalse($actual, $message);
+
+        return $this;
+    }
+
+
+    /**
+     * Assert true wrapper.
+     *
+     * @param $actual
+     * @param string $message
+     * @return $this
+     */
+    public function assertIsTrue($actual, $message = '')
+    {
+        $this->assertTrue($actual, $message);
+
+        return $this;
+    }
+
+    /**
+     * Assert equals wrapper.
+     *
+     * @param $actual
+     * @param $expected
+     * @param string $message
+     * @return $this
+     */
+    public function assertIsEqual($actual, $expected, $message = '')
+    {
+        $this->assertEqual($actual, $expected, $message);
+
+        return $this;
+    }
+
+    /**
+     * See escaped text.
+     *
+     * @param $text
+     * @return mixed
+     */
+    public function seeEscaped($text)
+    {
+        return $this->see(htmlentities($text));
+    }
+
 }

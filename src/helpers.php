@@ -26,14 +26,14 @@ if (!function_exists('given')) {
 }
 
 if (!function_exists('when')) {
-    /** @return \Tests\Feature\FeatureTestCase */
+    /** @return $this */
     function when()
     {
         return Tester::instance()->testCase;
     }
 }
 if (!function_exists('then')) {
-    /** @return \Tests\Feature\FeatureTestCase */
+    /** @return $this */
     function then()
     {
         return Tester::instance()->testCase;

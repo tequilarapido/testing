@@ -26,7 +26,8 @@ trait Debug
         if ($showBaseUrl = env('SHOW_BASE_URL')) {
             $content = str_replace(env('APP_URL'), $showBaseUrl, $content);
             $content = str_replace('//www.', 'http://www.', $content);
-            $content = str_replace('" /src/backend/', '"' . $showBaseUrl . '/src/backend/', $content);
+            $content = str_replace('"/src/backend/', '"' . $showBaseUrl . '/src/backend/', $content);
+            $content = str_replace('"/dist/frontend/', '"' . $showBaseUrl . '/dist/frontend/', $content);
         }
 
         // Create html temp file
