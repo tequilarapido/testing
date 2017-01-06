@@ -31,7 +31,6 @@ trait InteractsWithForms
 
         $this->clearInputs()->followRedirects();
 
-        $this->currentUri = $this->app->make('request')->fullUrl();
 
         $this->crawler = new Crawler($this->response->getContent(), $this->currentUri);
 
@@ -45,7 +44,7 @@ trait InteractsWithForms
      */
     protected function disableHoneypotTime()
     {
-        config()->set('app.honeybot.honeytime.rule', '');
+        config()->set('app.honeypot.honeytime.rule', '');
 
         return $this;
     }
