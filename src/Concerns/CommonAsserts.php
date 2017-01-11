@@ -20,6 +20,17 @@ trait CommonAsserts
     }
 
     /**
+     * ->verify() alias.
+     *
+     * @param $callable
+     * @return $this
+     */
+    public function andVerify($callable)
+    {
+        return $this->verify($callable);
+    }
+
+    /**
      * Assert page locale.
      *
      * @param $expectedLocale
