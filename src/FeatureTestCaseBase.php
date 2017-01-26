@@ -2,9 +2,9 @@
 
 namespace Tequilarapido\Testing;
 
-use Illuminate\Foundation\Testing\Concerns\InteractsWithSession;
-use Illuminate\Foundation\Testing\Concerns\MakesHttpRequests;
-use Illuminate\Foundation\Testing\TestCase;
+use Laravel\BrowserKitTesting\Concerns\InteractsWithSession;
+use Laravel\BrowserKitTesting\Concerns\MakesHttpRequests;
+use Laravel\BrowserKitTesting\TestCase;
 use Tequilarapido\Testing\Concerns\CommonAsserts;
 use Tequilarapido\Testing\Concerns\DatabaseCustomSetup;
 use Tequilarapido\Testing\Concerns\Debug;
@@ -67,7 +67,7 @@ abstract class FeatureTestCaseBase extends TestCase
     }
 
     /**
-     * Access world as test properties
+     * Access world as test properties.
      *
      * @param $name
      * @return mixed
@@ -78,5 +78,4 @@ abstract class FeatureTestCaseBase extends TestCase
             return $this->world[$name];
         }
     }
-
 }

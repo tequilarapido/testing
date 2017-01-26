@@ -99,4 +99,15 @@ trait CommonAsserts
         return $this->see(htmlentities($text));
     }
 
+    /**
+     * Asserts session has errors.
+     *
+     * @return $this
+     */
+    public function assertErrorsInSession()
+    {
+        $this->assertSessionHas('errors');
+
+        return $this;
+    }
 }

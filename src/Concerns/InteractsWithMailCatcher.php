@@ -19,7 +19,7 @@ trait InteractsWithMailCatcher
      */
     protected function setupMailcatcher()
     {
-        static::$mailCatcher = new Client(['base_url' => $this->mailCatcherBaseUrl]);
+        static::$mailCatcher = new Client(['base_uri' => $this->mailCatcherBaseUrl]);
         $this->purgeMails();
     }
 
