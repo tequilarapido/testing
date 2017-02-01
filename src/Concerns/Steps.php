@@ -34,6 +34,21 @@ trait Steps
         return $this;
     }
 
+    /**
+     * Execute an artisan commande
+     *
+     * @param $command
+     * @param array $parameters
+     * @param null $outputBuffer
+     * @return $this
+     */
+    public function console($command, $parameters = [], $outputBuffer = null)
+    {
+        \Artisan::call($command, $parameters, $outputBuffer);
+
+        return $this;
+    }
+
     public function toBeImplemented($message = 'To be implemented.')
     {
         $this->markTestIncomplete($message);
