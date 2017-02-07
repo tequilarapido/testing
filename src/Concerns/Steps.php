@@ -46,6 +46,8 @@ trait Steps
     {
         \Artisan::call($command, $parameters, $outputBuffer);
 
+        $this->consoleOutput = \Artisan::output();
+        
         return $this;
     }
 
