@@ -27,7 +27,7 @@ trait DatatableAsserts
     {
         $datatable = $this->decodeResponseJson();
         
-        $this->assertEquals($datatable['iTotalDisplayRecords'], $count);
+        $this->assertEquals($count, $datatable['iTotalDisplayRecords']);
         
         return $this;
     }
