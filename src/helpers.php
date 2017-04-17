@@ -32,6 +32,7 @@ if (!function_exists('when')) {
         return Tester::instance()->testCase;
     }
 }
+
 if (!function_exists('then')) {
     /** @return $this */
     function then()
@@ -39,6 +40,27 @@ if (!function_exists('then')) {
         return Tester::instance()->testCase;
     }
 }
+
+if (!function_exists('factory_one_or_many')) {
+    function factory_one_or_many($model, $attributes, $times)
+    {
+        if (1 === $times) {
+            return is_string($model)
+                ? factory($model)->create($attributes)
+                : $model($attributes);
+        }
+
+        $modelItems = [];
+        foreach (range(1, $times) as $i) {
+            $modelItems[] = is_string($model)
+                ? factory($model)->create($attributes)
+                : $model($attributes);
+        }
+
+        return $modelItems;
+    }
+}
+
 
 
 
