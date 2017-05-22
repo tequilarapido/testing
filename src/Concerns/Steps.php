@@ -50,6 +50,20 @@ trait Steps
         
         return $this;
     }
+    
+    public function seeInConsole($string)
+    {
+        $this->assertContains($string, $this->consoleOutput);
+
+        return $this;
+    }
+
+    public function dontSeeInConsole($string)
+    {
+        $this->assertNotContaines($string, $this->consoleOutput);
+
+        return $this;
+    }
 
     public function toBeImplemented($message = 'To be implemented.')
     {
