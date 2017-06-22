@@ -2,6 +2,10 @@
 
 namespace Tequilarapido\Testing\Concerns;
 
+use App\Exceptions\Handler;
+use Illuminate\Contracts\Debug\ExceptionHandler;
+use Exception;
+
 trait Debug
 {
     /**
