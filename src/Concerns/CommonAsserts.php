@@ -127,6 +127,6 @@ trait CommonAsserts
 
         $this->assertEquals(t($expected), t($actual));
         
-        return this;
+        return $this;
     }
 }
