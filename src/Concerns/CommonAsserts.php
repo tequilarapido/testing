@@ -110,7 +110,7 @@ trait CommonAsserts
 
         return $this;
     }
-    
+
     /**
      * Asserts two strings are equal ignoring spaces and newlines
      *
@@ -121,12 +121,13 @@ trait CommonAsserts
      */
     public function assertEqualIgnoringWhitespaces($expected, $actual)
     {
-        function t($str) {;
-            return trim(preg_replace('/\s+/', ' ', $str));
-        }
+        $this->assertEquals($this->ignoreWhitespaces($expected), $this->ignoreWhitespaces($actual));
 
-        $this->assertEquals(t($expected), t($actual));
-        
         return $this;
+    }
+
+    private function ignoreWhitespaces($str)
+    {
+        return trim(preg_replace('/\s+/', ' ', $str));
     }
 }
