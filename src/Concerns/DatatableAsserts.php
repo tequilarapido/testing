@@ -53,6 +53,30 @@ trait DatatableAsserts
 
         return $this;
     }
+    
+     /**
+     * Asserts a column content in whatever order.
+     *
+     * @param $column
+     * @param $expected
+     * @return $this
+     */
+    public function seeInWhateverOrderInDatatable($column, $expected)
+    {
+        $datatable = $this->decodeResponseJson();
+
+        $actual = collect($datatable['aaData'])->reduce(function ($carry, $item) use ($column) {
+            $carry[] = $item[$column];
+
+            return $carry;
+        }, []);
+
+        asort($expected);
+        asort($actual);
+        $this->assertEquals($expected, $actual);
+
+        return $this;
+    }
 
     /**
      * Asserts first column content.
