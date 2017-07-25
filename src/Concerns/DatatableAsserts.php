@@ -72,7 +72,7 @@ trait DatatableAsserts
         }, []);
 
 
-        $this->assertSame($expected, $actual);
+        $this->assertEquals(0, count(array_diff($expected, $actual)), 'Not the same array');
 
         return $this;
     }
