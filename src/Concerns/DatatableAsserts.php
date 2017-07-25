@@ -71,9 +71,8 @@ trait DatatableAsserts
             return $carry;
         }, []);
 
-        asort($expected);
-        asort($actual);
-        $this->assertEquals($expected, $actual);
+
+        $this->assertSame($expected, $actual);
 
         return $this;
     }
