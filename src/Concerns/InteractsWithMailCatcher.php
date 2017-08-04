@@ -61,6 +61,20 @@ trait InteractsWithMailCatcher
 
         return $this;
     }
+    
+    /**
+     * Assert last message subject contains given string.
+     *
+     * @param $expected
+     * @param string $message
+     * @return $this
+     */
+    public function assertMailSubjectContains($expected, $message = '')
+    {
+        $this->assertContains($expected, $this->getLastMail()->subject, $message);
+
+        return $this;
+    }
 
     /**
      * Assert last message plain body contains.
