@@ -16,6 +16,7 @@ trait InteractsWithMailCatcher
 
     /**
      * Setup mail catcher client
+     * @before
      */
     protected function setupMailcatcher()
     {
@@ -25,6 +26,7 @@ trait InteractsWithMailCatcher
 
     /**
      * free the mailcatcher client instance
+     * @after
      */
     protected function tearDownMailcatcher()
     {
