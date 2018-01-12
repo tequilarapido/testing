@@ -13,7 +13,9 @@
     ],
     "require": {
         "laravel/framework": "5.4.* || 5.5.*",
-        "laravel/browser-kit-testing": "1.0.*"
+        "laravel/browser-kit-testing": "1.0.*",
+        "symfony/css-selector": "~3.1",
+        "symfony/dom-crawler": "~3.1"        
     },
     "autoload": {
         "psr-4": {
