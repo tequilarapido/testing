@@ -67,4 +67,31 @@ trait InteractsWithForms
 
         return array_merge($common, $formatted);
     }
+
+    public function seeDisabledInput($inputName)
+    {
+        return $this->seeElement("input[name='$inputName']", ['disabled' => 'disabled']);
+    }
+
+
+    public function seeReadOnlyInput($inputName)
+    {
+        return $this->seeElement("input[name='$inputName']", ['readonly' => 'readonly']);
+    }
+
+    public function seeReadOnlyTranslatedInput($inputName)
+    {
+        foreach (p_supported_locales() as $locale) {
+            $localInputName = $locale . '[' . $inputName . ']';
+
+            return $this->seeElement("input[name='$localInputName']", ['readonly' => 'readonly']);
+        }
+
+        return $this;
+    }
+
+    public function seeReadOnlyTextarea($inputName)
+    {
+        return $this->seeElement("textarea[name='$inputName']", ['readonly' => 'readonly', 'class' => 'in-sync form-control']);
+    }
 }
