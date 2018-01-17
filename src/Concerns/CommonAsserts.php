@@ -2,132 +2,96 @@
 
 namespace Tequilarapido\Testing\Concerns;
 
-trait CommonAsserts
+use Symfony\Component\DomCrawler\Crawler;
+use Symfony\Component\DomCrawler\Form;
+
+trait InteractsWithForms
 {
+    protected function submitFormWithoutAssertingPageLoad($buttonText, $inputs = [], $uploads = [])
+    {
+        $this->makeRequestWithoutAssertingPageLoadUsingForm($this->fillForm($buttonText, $inputs), $uploads);
+
+        return $this;
+    }
+
+    protected function makeRequestWithoutAssertingPageLoadUsingForm(Form $form, array $uploads = [])
+    {
+        $files = $this->convertUploadsForTesting($form, $uploads);
+
+        return $this->makeRequestWithoutAssertingPageLoad(
+            $form->getMethod(), $form->getUri(), $this->extractParametersFromForm($form), [], $files
+        );
+    }
+
+    protected function makeRequestWithoutAssertingPageLoad($method, $uri, $parameters = [], $cookies = [], $files = [])
+    {
+        $uri = $this->prepareUrlForRequest($uri);
+
+        $this->call($method, $uri, $parameters, $cookies, $files);
+
+        $this->clearInputs()->followRedirects();
+
+
+        $this->crawler = new Crawler($this->response->getContent(), $this->currentUri);
+
+        return $this;
+    }
+
     /**
-     * Can be used to wrap phpunit asserts and continue chaining.
+     * Disable honeytime.
      *
-     * @param $callable
      * @return $this
      */
-    public function verify($callable)
+    protected function disableHoneypotTime()
     {
-        if (is_callable($callable)) {
-            call_user_func($callable);
+        config()->set('app.honeypot.honeytime.rule', '');
+
+        return $this;
+    }
+
+    /**
+     * Prepare backend translated model form data
+     *
+     * @param $common
+     * @param $translated
+     * @return array
+     */
+    public function translatedFormData($common, $translated)
+    {
+        $formatted = [];
+        foreach (p_supported_locales() as $locale) {
+            foreach ($translated as $key => $value) {
+                $formatted[$locale . '[' . $key . ']'] = "[$locale] $value";
+            }
+        }
+
+        return array_merge($common, $formatted);
+    }
+
+    public function seeDisabledInput($inputName)
+    {
+        return $this->seeElement("input[name='$inputName']", ['disabled' => 'disabled']);
+    }
+
+
+    public function seeReadOnlyInput($inputName)
+    {
+        return $this->seeElement("input[name='$inputName']", ['readonly' => 'readonly']);
+    }
+
+    public function seeReadOnlyTranslatedInput($inputName)
+    {
+        foreach (p_supported_locales() as $locale) {
+            $localInputName = $locale . '[' . $inputName . ']';
+
+            return $this->seeElement("input[name='$localInputName']", ['readonly' => 'readonly']);
         }
 
         return $this;
     }
 
-    /**
-     * ->verify() alias.
-     *
-     * @param $callable
-     * @return $this
-     */
-    public function andVerify($callable)
+    public function seeReadOnlyTextarea($inputName)
     {
-        return $this->verify($callable);
-    }
-
-    /**
-     * Assert page locale.
-     *
-     * @param $expectedLocale
-     * @param string $message
-     * @return $this
-     */
-    public function seePageLocaleIs($expectedLocale, $message = '')
-    {
-        $this->assertEquals($expectedLocale, $this->crawler()->filter('html')->attr('lang'), $message);
-
-        return $this;
-    }
-
-    /**
-     * Assert false wrapper.
-     *
-     * @param $actual
-     * @param string $message
-     * @return $this
-     */
-    public function assertIsFalse($actual, $message = '')
-    {
-        $this->assertFalse($actual, $message);
-
-        return $this;
-    }
-
-
-    /**
-     * Assert true wrapper.
-     *
-     * @param $actual
-     * @param string $message
-     * @return $this
-     */
-    public function assertIsTrue($actual, $message = '')
-    {
-        $this->assertTrue($actual, $message);
-
-        return $this;
-    }
-
-    /**
-     * Assert equals wrapper.
-     *
-     * @param $actual
-     * @param $expected
-     * @param string $message
-     * @return $this
-     */
-    public function assertIsEqual($actual, $expected, $message = '')
-    {
-        $this->assertEqual($actual, $expected, $message);
-
-        return $this;
-    }
-
-    /**
-     * See escaped text.
-     *
-     * @param $text
-     * @return mixed
-     */
-    public function seeEscaped($text)
-    {
-        return $this->see(htmlentities($text));
-    }
-
-    /**
-     * Asserts session has errors.
-     *
-     * @return $this
-     */
-    public function assertErrorsInSession()
-    {
-        $this->assertSessionHas('errors');
-
-        return $this;
-    }
-
-    /**
-     * Asserts two strings are equal ignoring spaces and newlines
-     *
-     * @param $expected
-     * @param $actual
-     *
-     * @return $this
-     */
-    public function assertEqualIgnoringWhitespaces($expected, $actual)
-    {
-        $this->assertEquals($this->ignoreWhitespaces($expected), $this->ignoreWhitespaces($actual));
-
-        return $this;
-    }
-
-    private function ignoreWhitespaces($str)
-    {
-        return trim(preg_replace('/\s+/', ' ', $str));
+        return $this->seeElement("textarea[name='$inputName']", ['readonly' => 'readonly', 'class' => 'in-sync form-control']);
     }
 }
