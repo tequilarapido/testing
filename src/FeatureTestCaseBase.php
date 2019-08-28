@@ -21,6 +21,12 @@ abstract class FeatureTestCaseBase extends TestCase
         Debug;
 
     /**
+     * Use DatabaseCustomSetup ?
+     */
+    public $useDatabaseCustomSetup = true;
+
+
+    /**
      * List of seeders classes to after migrating the database.
      *
      * @var array
@@ -63,7 +69,9 @@ abstract class FeatureTestCaseBase extends TestCase
 
         $this->world = [];
 
-        $this->setupDatabase();
+        if($this->$useDatabaseCustomSetup){
+            $this->setupDatabase();
+        }
     }
 
     /**
