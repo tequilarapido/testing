@@ -69,7 +69,7 @@ abstract class FeatureTestCaseBase extends TestCase
 
         $this->world = [];
 
-        if($this->$useDatabaseCustomSetup){
+        if($this->useDatabaseCustomSetup){
             $this->setupDatabase();
         }
     }
