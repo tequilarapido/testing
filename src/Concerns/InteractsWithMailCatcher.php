@@ -61,7 +61,7 @@ trait InteractsWithMailCatcher
 
         return $this;
     }
-    
+
     /**
      * Assert last message subject contains given string.
      *
@@ -71,7 +71,7 @@ trait InteractsWithMailCatcher
      */
     public function assertMailSubjectContains($expected, $message = '')
     {
-        $this->assertContains($expected, $this->getLastMail()->subject, $message);
+        $this->assertStringContainsString($expected, $this->getLastMail()->subject, $message);
 
         return $this;
     }
@@ -87,7 +87,7 @@ trait InteractsWithMailCatcher
      */
     public function assertMailPlainBodyContains($needle, $message = '', $ignoreCase = false)
     {
-        $this->assertContains($needle, $this->getLatestMailPlainBody(), $message, $ignoreCase);
+        $this->assertStringContainsString($needle, $this->getLatestMailPlainBody(), $message, $ignoreCase);
 
         return $this;
     }
@@ -102,7 +102,7 @@ trait InteractsWithMailCatcher
      */
     public function assertMailHtmlBodyContains($needle, $message = '', $ignoreCase = false)
     {
-        $this->assertContains($needle, $this->getLatestMailHtmlBody(), $message, $ignoreCase);
+        $this->assertStringContainsString($needle, $this->getLatestMailHtmlBody(), $message, $ignoreCase);
 
         return $this;
     }

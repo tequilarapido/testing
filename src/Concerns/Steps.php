@@ -47,13 +47,13 @@ trait Steps
         \Artisan::call($command, $parameters, $outputBuffer);
 
         $this->consoleOutput = \Artisan::output();
-        
+
         return $this;
     }
-    
+
     public function seeInConsole($string)
     {
-        $this->assertContains($string, $this->consoleOutput);
+        $this->assertStringContainsString($string, $this->consoleOutput);
 
         return $this;
     }

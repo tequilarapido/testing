@@ -3,11 +3,11 @@
 namespace Tequilarapido\Testing;
 
 use Laravel\BrowserKitTesting\Concerns\InteractsWithSession;
-use Laravel\BrowserKitTesting\Concerns\MakesHttpRequests;
 use Laravel\BrowserKitTesting\TestCase;
 use Tequilarapido\Testing\Concerns\CommonAsserts;
 use Tequilarapido\Testing\Concerns\DatabaseCustomSetup;
 use Tequilarapido\Testing\Concerns\Debug;
+use Tequilarapido\Testing\Concerns\MakesHttpRequests;
 use Tequilarapido\Testing\Concerns\Steps;
 use Tequilarapido\Testing\Support\Tester;
 
