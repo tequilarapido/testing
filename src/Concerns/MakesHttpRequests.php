@@ -19,9 +19,7 @@ trait MakesHttpRequests
         $decodedResponse = json_decode($this->response->getContent(), true);
 
         if (is_null($decodedResponse) || $decodedResponse === false) {
-            PHPUnit::fail(
-                "JSON was not returned from [{$this->currentUri}]."
-            );
+            $this->fail("JSON was not returned from [{$this->currentUri}].");
         }
 
         return $decodedResponse;
